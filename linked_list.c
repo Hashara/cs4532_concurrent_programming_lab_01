@@ -12,11 +12,11 @@ int Member(int value, struct list_node* head_p){
     }
 
     if (curr_p == NULL || curr_p -> data > value){
-        printf("not member");
+        printf("not member %d \n", value);
         return 0;
     }
     else{
-        printf("member");
+        printf("member %d \n", value);
         return 1;
     }
 }
@@ -41,6 +41,7 @@ int Insert(int value, struct list_node** head_p){
         else{
             pred_p -> next = temp_p;
         }
+        printf("insert_success %d \n", value);
         return 1;
     }
     else{
@@ -65,6 +66,7 @@ int Delete(int value, struct list_node ** head_p){
             pred_p->next = curr_p->next;
             free(curr_p);
         }
+        printf("delete_success %d \n", value);
         return 1;
     }
     else{
@@ -93,4 +95,3 @@ void Print(struct list_node *head_p){
 //    }
 //    printf("Entire linked list destructed!!\n");
 //}
-
