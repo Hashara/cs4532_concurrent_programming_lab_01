@@ -1,3 +1,0 @@
-"C:\Program Files\JetBrains\CLion 2021.1.3\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\cs4532_concurrent_programming_lab_01.dir/objects.a
-C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\ar.exe cr CMakeFiles\cs4532_concurrent_programming_lab_01.dir/objects.a @CMakeFiles\cs4532_concurrent_programming_lab_01.dir\objects1.rsp
-C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\gcc.exe -g -Wl,--whole-archive CMakeFiles\cs4532_concurrent_programming_lab_01.dir/objects.a -Wl,--no-whole-archive -o cs4532_concurrent_programming_lab_01.exe -Wl,--out-implib,libcs4532_concurrent_programming_lab_01.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\cs4532_concurrent_programming_lab_01.dir\linklibs.rsp

@@ -1,4 +1,0 @@
-"C:\Program Files\JetBrains\CLion 2021.1.3\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" "E:\academic\concurrent programming\cs4532_concurrent_programming_lab_01"
--- Configuring done
--- Generating done
--- Build files have been written to: E:/academic/concurrent programming/cs4532_concurrent_programming_lab_01/cmake-build-debug
