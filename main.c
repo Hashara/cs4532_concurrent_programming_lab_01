@@ -6,6 +6,7 @@
 #include "serial.h"
 #include "file_writer.h"
 #include "mutex.h"
+#include "rwlock.h"
 
 #define MAX 65535
 
@@ -21,7 +22,7 @@ int main(int argc, char *argv[] ) {
     int count = 0;
     struct list_node *head = NULL;
 
-    int thread_num = 8;
+    int thread_num = 4;
     int fraction = 1;
     int run_type = 2;
     switch (fraction)
@@ -74,13 +75,11 @@ int main(int argc, char *argv[] ) {
             mutex_run(m_member, m_insert, m_delete, &head, m, thread_num);
             break;
         }
-//
-//        case 3:{
-//            m_member = 0.5;
-//            m_insert = 0.25;
-//            m_delete = 0.25;
-//            break;
-//        }
+
+        case 3:{
+            rwlock_run(m_member, m_insert, m_delete, &head, m, thread_num);
+            break;
+        }
 
         default:{
             serial_run(m_member,m_insert,m_delete,&head,m);
