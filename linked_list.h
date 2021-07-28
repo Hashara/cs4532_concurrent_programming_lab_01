@@ -11,8 +11,8 @@ struct list_node {
 };
 
 int Member(int value, struct list_node *head_p);
-int Insert(int value, struct list_node **head_p);
-int Delete(int value, struct list_node **head_p);
+int Insert(int value, struct list_node *head_p);
+int Delete(int value, struct list_node *head_p);
 void Print(struct list_node * head_p);
 //void destructor(struct list_node* head_p);
 
