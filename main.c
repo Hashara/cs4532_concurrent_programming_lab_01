@@ -5,6 +5,7 @@
 #include "linked_list.h"
 #include "serial.h"
 #include "file_writer.h"
+#include "mutex.h"
 
 #define MAX 65535
 
@@ -20,8 +21,9 @@ int main(int argc, char *argv[] ) {
     int count = 0;
     struct list_node *head = NULL;
 
+    int thread_num = 8;
     int fraction = 1;
-    int run_type = 1;
+    int run_type = 2;
     switch (fraction)
     {
         case 1:{
@@ -68,12 +70,10 @@ int main(int argc, char *argv[] ) {
             break;
         }
 
-//        case 2:{
-//            m_member = 0.9;
-//            m_insert = 0.05;
-//            m_delete = 0.05;
-//            break;
-//        }
+        case 2:{
+            mutex_run(m_member, m_insert, m_delete, &head, m, thread_num);
+            break;
+        }
 //
 //        case 3:{
 //            m_member = 0.5;
