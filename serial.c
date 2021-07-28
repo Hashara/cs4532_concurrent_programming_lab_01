@@ -52,9 +52,10 @@ void serial_run(float m_member, float m_insert, float m_delete, struct list_node
 
     }
     gettimeofday(&stop_time, NULL); // get end time
-    time_interval = stop_time.tv_sec - start_time.tv_sec;
+    time_interval = (stop_time.tv_sec - start_time.tv_sec) * 1000.0
+            + (stop_time.tv_usec - start_time.tv_usec) / 1000.0;
 
     printf("%d\n", total_operations_count);
-    printf("%f\n", time_interval);
+    printf(" %lu\n", time_interval);
 
 }
