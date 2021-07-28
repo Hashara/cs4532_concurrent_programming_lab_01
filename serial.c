@@ -33,7 +33,7 @@ void serial_run(float m_member, float m_insert, float m_delete, struct list_node
         rand_operation = rand() % 3; // randomize the operation
 
         if (rand_operation == 0 && member_operations_count < member_operations) {
-            Member(rand_value, &head);
+            Member(rand_value, head);
             member_operations_count++;
             total_operations_count++;
         }
@@ -41,7 +41,8 @@ void serial_run(float m_member, float m_insert, float m_delete, struct list_node
             Insert(rand_value, &head);
             insert_operations_count++;
             total_operations_count++;
-            Member(rand_value, &head);
+            Member(rand_value, head);
+
         }
         else if (rand_operation == 2 && delete_operations_count < delete_operations) {
             Delete(rand_value, &head);

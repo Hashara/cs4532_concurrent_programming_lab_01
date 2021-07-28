@@ -52,6 +52,14 @@ int main(int argc, char *argv[] ) {
         }
     }
 
+    // populate the linked list with 1000 values
+    srand(time(0)); // different random status for each execution
+    while (count < n) {
+        int val = rand() % MAX;
+        Insert(val, &head);
+        count++;
+    }
+
     switch (run_type)
     {
         case 1:{
@@ -80,13 +88,7 @@ int main(int argc, char *argv[] ) {
             break;
         }
     }
-    // populate the linked list with 1000 values
-    srand(time(0)); // different random status for each execution
-    while (count < n) {
-        int val = rand() % MAX;
-        Insert(val, &head);
-        count++;
-    }
+
 
     return 0;
 }
