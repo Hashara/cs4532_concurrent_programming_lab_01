@@ -11,17 +11,27 @@
 #define MAX 65535
 void *op_mtx(void* func_data);
 
-void mutex_run(int m_member, int m_insert, int m_delete, struct list_node **head, int m, int thread_num) {
-//    pthread_mutex_t mutex;
+void mutex_run(int m_member, int m_insert, int m_delete, int m, int thread_num) {
+    int count = 0;
+    int n = 1000; // number of elements in the list
     struct data func_data;
+    func_data.head = NULL;
     struct timeval stop_time;
     struct timeval start_time;
     unsigned long time_interval;
+
     if (thread_num != 1) {
         m = (int) m/thread_num;
 //        printf("calculations per thread %d \n", m);
     }
     srand(time(0)); // different random status for each execution
+
+    // populate the linked list with 1000 values
+    while (count < n) {
+        int val = rand() % MAX;
+        Insert(val, &func_data.head);
+        count++;
+    }
 
     // Initializing the mutex
     pthread_mutex_init(&func_data.mutex, NULL);
@@ -29,9 +39,7 @@ void mutex_run(int m_member, int m_insert, int m_delete, struct list_node **head
     // Generate Threads
     pthread_t *thread_handles = malloc(thread_num * sizeof(pthread_t));
 
-//    func_data.mutex = mutex;
     func_data.m = m;
-    func_data.head = head;
     func_data.m_insert = m_insert;
     func_data.m_delete = m_delete;
     func_data.m_member = m_member;
@@ -56,7 +64,7 @@ void mutex_run(int m_member, int m_insert, int m_delete, struct list_node **head
 
     printf("Mutex run %lu\n", time_interval);
 
-//    destructor(&head);
+    destructor(func_data.head);
     write_on_csv("MUTEX", thread_num, m_member, m_insert, m_delete, time_interval);
 
 }
@@ -81,6 +89,7 @@ void mutex_run(int m_member, int m_insert, int m_delete, struct list_node **head
                 member_operations_count++;
                 total_operations_count++;
                 pthread_mutex_unlock(&f_data->mutex);
+
             } else if (rand_operation == 1 && insert_operations_count < f_data->m_insert) {
                 pthread_mutex_lock(&f_data->mutex);
                 Insert(rand_value, &f_data->head);

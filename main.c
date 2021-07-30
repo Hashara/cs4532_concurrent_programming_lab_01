@@ -9,7 +9,7 @@
 #include "rwlock.h"
 
 #define MAX 65535
-#define RUNS 100
+#define RUNS 500
 
 int main(int argc, char *argv[] ) {
     int m_member;
@@ -17,16 +17,13 @@ int main(int argc, char *argv[] ) {
     int m_delete;
 
     
-    int n = 1000; // number of elements in the list
     int m = 10000;
 
     int run_count = 0;
-    int count;
-    struct list_node *head = NULL;
 
     int thread_num = 8;
     int fraction = 2;
-    int run_type = 2;
+    int run_type = 1;
 
     switch (fraction)
     {
@@ -65,34 +62,27 @@ int main(int argc, char *argv[] ) {
 
 
     while (run_count < RUNS){
-        head = NULL;
-        count = 0;
-        // populate the linked list with 1000 values
         srand(time(0)); // different random status for each execution
-        while (count < n) {
-            int val = rand() % MAX;
-            Insert(val, &head);
-            count++;
-        }
+
         switch (run_type)
         {
             case 1:{
-                serial_run(m_member,m_insert,m_delete,&head,m);
+                serial_run(m_member,m_insert,m_delete,m);
                 break;
             }
 
             case 2:{
-                mutex_run(m_member, m_insert, m_delete, &head, m, thread_num);
+                mutex_run(m_member, m_insert, m_delete, m, thread_num);
                 break;
             }
 
             case 3:{
-                rwlock_run(m_member, m_insert, m_delete, &head, m, thread_num);
+                rwlock_run(m_member, m_insert, m_delete, m, thread_num);
                 break;
             }
 
             default:{
-                serial_run(m_member,m_insert,m_delete,&head,m);
+                serial_run(m_member,m_insert,m_delete,m);
                 break;
             }
         }

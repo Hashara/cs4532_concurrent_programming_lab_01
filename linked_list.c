@@ -32,7 +32,7 @@ int Insert(int value, struct list_node** head_p){
     }
 
     if(curr_p == NULL || curr_p->data > value){
-        temp_p = malloc(sizeof(struct list_node));
+        temp_p = (struct list_node *) malloc(sizeof(struct list_node));
         temp_p -> data = value;
         temp_p -> next = curr_p;
         if(pred_p == NULL){
@@ -45,6 +45,7 @@ int Insert(int value, struct list_node** head_p){
         return 1;
     }
     else{
+//        printf("insert_unsuccess %d \n", value);
         return 0;
     }
 }
@@ -70,6 +71,7 @@ int Delete(int value, struct list_node ** head_p){
         return 1;
     }
     else{
+//        printf("delete_unsuccess %d \n", value);
         return 0;
     }
 }
@@ -93,5 +95,5 @@ void destructor(struct list_node* head_p){
         curr_p = curr_p->next;
         free(temp_p);
     }
-    printf("Entire linked list destructed!!\n");
+    printf("linked list destructed\n");
 }
