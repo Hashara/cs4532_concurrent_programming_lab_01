@@ -9,7 +9,8 @@ The program has a linked list implemented with Member, Insert and Delete functio
 
 Before the experiments are carried out, the linked list is populated with 1000 elements between 0 and 2^16 - 1 every time the program runs. 
 
- 
+## Instructions
+
 Before running the program using an IDE, the following variables need to be set in the `main.c` file accordingly.
 - `thread_num` - the number of threads to be created
 - `fraction` - to select a case out of case 1, 2, or 3. Assign 1 for case 1, 2 for case 2 and 3 for case 3
