@@ -9,7 +9,7 @@
 #include "rwlock.h"
 
 #define MAX 65535
-#define RUNS 2
+#define RUNS 100
 
 int main(int argc, char *argv[] ) {
     int m_member;
@@ -24,9 +24,9 @@ int main(int argc, char *argv[] ) {
     int count;
     struct list_node *head = NULL;
 
-    int thread_num = 4;
-    int fraction = 1;
-    int run_type = 1;
+    int thread_num = 8;
+    int fraction = 2;
+    int run_type = 2;
 
     switch (fraction)
     {

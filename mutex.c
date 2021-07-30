@@ -12,24 +12,24 @@
 void *op_mtx(void* func_data);
 
 void mutex_run(int m_member, int m_insert, int m_delete, struct list_node **head, int m, int thread_num) {
-    pthread_mutex_t mutex;
+//    pthread_mutex_t mutex;
     struct data func_data;
     struct timeval stop_time;
     struct timeval start_time;
     unsigned long time_interval;
     if (thread_num != 1) {
         m = (int) m/thread_num;
-        printf("calculations per thread %d \n", m);
+//        printf("calculations per thread %d \n", m);
     }
     srand(time(0)); // different random status for each execution
 
     // Initializing the mutex
-    pthread_mutex_init(mutex, NULL);
+    pthread_mutex_init(&func_data.mutex, NULL);
 
     // Generate Threads
     pthread_t *thread_handles = malloc(thread_num * sizeof(pthread_t));
 
-    func_data.mutex = mutex;
+//    func_data.mutex = mutex;
     func_data.m = m;
     func_data.head = head;
     func_data.m_insert = m_insert;
@@ -49,14 +49,14 @@ void mutex_run(int m_member, int m_insert, int m_delete, struct list_node **head
 
     gettimeofday(&stop_time, NULL); // get end time
 
-    pthread_mutex_destroy(mutex);
+    pthread_mutex_destroy(&func_data.mutex);
 
-    time_interval = (stop_time.tv_sec - start_time.tv_sec) * 1000.0
-                    + (stop_time.tv_usec - start_time.tv_usec) / 1000.0;
+    time_interval = (stop_time.tv_sec - start_time.tv_sec) * 1000000
+                    + stop_time.tv_usec - start_time.tv_usec;
 
     printf("Mutex run %lu\n", time_interval);
 
-    destructor(&head);
+//    destructor(&head);
     write_on_csv("MUTEX", thread_num, m_member, m_insert, m_delete, time_interval);
 
 }
@@ -76,28 +76,28 @@ void mutex_run(int m_member, int m_insert, int m_delete, struct list_node **head
             rand_operation = rand() % 3; // randomize the operation
 
             if (rand_operation == 0 && member_operations_count < f_data->m_member) {
-                pthread_mutex_lock(f_data->mutex);
+                pthread_mutex_lock(&f_data->mutex);
                 Member(rand_value, f_data->head);
                 member_operations_count++;
                 total_operations_count++;
-                pthread_mutex_unlock(f_data->mutex);
+                pthread_mutex_unlock(&f_data->mutex);
             } else if (rand_operation == 1 && insert_operations_count < f_data->m_insert) {
-                pthread_mutex_lock(f_data->mutex);
+                pthread_mutex_lock(&f_data->mutex);
                 Insert(rand_value, &f_data->head);
                 insert_operations_count++;
                 total_operations_count++;
-                pthread_mutex_unlock(f_data->mutex);
+                pthread_mutex_unlock(&f_data->mutex);
 
             } else if (rand_operation == 2 && delete_operations_count < f_data->m_delete) {
-                pthread_mutex_lock(f_data->mutex);
+                pthread_mutex_lock(&f_data->mutex);
                 Delete(rand_value, &f_data->head);
                 delete_operations_count++;
                 total_operations_count++;
-                pthread_mutex_unlock(f_data->mutex);
+                pthread_mutex_unlock(&f_data->mutex);
 
             }
 
         }
-        printf("total operations %d \n", total_operations_count);
+//        printf("total operations %d \n", total_operations_count);
 
     }
