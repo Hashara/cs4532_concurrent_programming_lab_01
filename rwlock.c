@@ -21,8 +21,11 @@ void rwlock_run(int m_member, int m_insert, int m_delete, int m, int thread_num)
     unsigned long time_interval;
 
     if (thread_num != 1) {
-        m = (int) m/thread_num;
-//        printf("calculations per thread %d \n", m);
+        m_member = (int) m_member/thread_num;
+        m_insert = (int) m_delete/thread_num;
+        m_delete = (int) m_delete/thread_num;
+        m = m_member + m_insert + m_delete;
+
     }
     srand(time(0)); // different random status for each execution
 
