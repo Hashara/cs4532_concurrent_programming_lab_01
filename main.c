@@ -9,6 +9,7 @@
 #include "rwlock.h"
 
 #define MAX 65535
+#define RUNS 2
 
 int main(int argc, char *argv[] ) {
     int m_member;
@@ -19,12 +20,14 @@ int main(int argc, char *argv[] ) {
     int n = 1000; // number of elements in the list
     int m = 10000;
 
-    int count = 0;
+    int run_count = 0;
+    int count;
     struct list_node *head = NULL;
 
     int thread_num = 4;
     int fraction = 1;
-    int run_type = 2;
+    int run_type = 1;
+
     switch (fraction)
     {
         case 1:{
@@ -56,35 +59,44 @@ int main(int argc, char *argv[] ) {
         }
     }
 
-//    make_csv_file();
-    // populate the linked list with 1000 values
-    srand(time(0)); // different random status for each execution
-    while (count < n) {
-        int val = rand() % MAX;
-        Insert(val, &head);
-        count++;
-    }
-    switch (run_type)
-    {
-        case 1:{
-            serial_run(m_member,m_insert,m_delete,&head,m);
-            break;
-        }
+    make_csv_file();
 
-        case 2:{
-            mutex_run(m_member, m_insert, m_delete, &head, m, thread_num);
-            break;
-        }
 
-        case 3:{
-            rwlock_run(m_member, m_insert, m_delete, &head, m, thread_num);
-            break;
-        }
 
-        default:{
-            serial_run(m_member,m_insert,m_delete,&head,m);
-            break;
+
+    while (run_count < RUNS){
+        struct list_node *head = NULL;
+        count = 0;
+        // populate the linked list with 1000 values
+        srand(time(0)); // different random status for each execution
+        while (count < n) {
+            int val = rand() % MAX;
+            Insert(val, &head);
+            count++;
         }
+        switch (run_type)
+        {
+            case 1:{
+                serial_run(m_member,m_insert,m_delete,&head,m);
+                break;
+            }
+
+            case 2:{
+                mutex_run(m_member, m_insert, m_delete, &head, m, thread_num);
+                break;
+            }
+
+            case 3:{
+                rwlock_run(m_member, m_insert, m_delete, &head, m, thread_num);
+                break;
+            }
+
+            default:{
+                serial_run(m_member,m_insert,m_delete,&head,m);
+                break;
+            }
+        }
+        run_count ++;
     }
 
 

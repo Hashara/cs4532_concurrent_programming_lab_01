@@ -12,11 +12,11 @@ int Member(int value, struct list_node* head_p){
     }
 
     if (curr_p == NULL || curr_p -> data > value){
-        printf("not member %d \n", value);
+//        printf("not member %d \n", value);
         return 0;
     }
     else{
-        printf("member %d \n", value);
+//        printf("member %d \n", value);
         return 1;
     }
 }
@@ -41,7 +41,7 @@ int Insert(int value, struct list_node** head_p){
         else{
             pred_p -> next = temp_p;
         }
-        printf("insert_success %d \n", value);
+//        printf("insert_success %d \n", value);
         return 1;
     }
     else{
@@ -66,7 +66,7 @@ int Delete(int value, struct list_node ** head_p){
             pred_p->next = curr_p->next;
             free(curr_p);
         }
-        printf("delete_success %d \n", value);
+//        printf("delete_success %d \n", value);
         return 1;
     }
     else{
@@ -78,20 +78,20 @@ void Print(struct list_node *head_p){
     struct list_node *curr_p = head_p;
 
     while (curr_p != NULL){
-        printf("node value: %d \n",curr_p->data);
+//        printf("node value: %d \n",curr_p->data);
         curr_p = curr_p->next;
     }
 }
 
-//void destructor(struct list_node* head_p){
-//    struct list_node* curr_p = head_p;
-//    struct list_node* temp_p = NULL;
-//
-//    while (curr_p != NULL)
-//    {
-//        temp_p = curr_p;
-//        curr_p = curr_p->next;
-//        free(temp_p);
-//    }
-//    printf("Entire linked list destructed!!\n");
-//}
+void destructor(struct list_node* head_p){
+    struct list_node* curr_p = head_p;
+    struct list_node* temp_p = NULL;
+
+    while (curr_p != NULL)
+    {
+        temp_p = curr_p;
+        curr_p = curr_p->next;
+        free(temp_p);
+    }
+    printf("Entire linked list destructed!!\n");
+}

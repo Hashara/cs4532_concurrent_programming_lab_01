@@ -56,6 +56,7 @@ void mutex_run(int m_member, int m_insert, int m_delete, struct list_node **head
 
     printf("Mutex run %lu\n", time_interval);
 
+    destructor(&head);
     write_on_csv("MUTEX", thread_num, m_member, m_insert, m_delete, time_interval);
 
 }
