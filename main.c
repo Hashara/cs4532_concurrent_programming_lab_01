@@ -65,7 +65,7 @@ int main(int argc, char *argv[] ) {
 
 
     while (run_count < RUNS){
-        struct list_node *head = NULL;
+        head = NULL;
         count = 0;
         // populate the linked list with 1000 values
         srand(time(0)); // different random status for each execution
